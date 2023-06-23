@@ -1,13 +1,18 @@
-﻿using System.Drawing;
+﻿#region
+
+using System.Drawing;
+
+#endregion
 
 namespace ASCII_Graphics
 {
     public static class BitmapToAsciiConverter
     {
         private readonly static char[] AsciiCharsForGrayColor =
+            // { ' ', '.', ',', ':', ';', '!', '+', '*', '?', '1', '0', '=', 'S', '&', '%', '$', '№', '#', '@' };
             { ' ', '.', ',', ':', ';', '!', '+', '*', '?', '%', 'S', '№', '#', '@' };
 
-        public static string ToAscii(this Bitmap bitmap)
+        public static string BitmapToAscii(Bitmap bitmap)
         {
             var asciiString = "";
             for (var y = 0; y < bitmap.Height; y++)

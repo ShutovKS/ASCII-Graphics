@@ -1,13 +1,17 @@
-﻿using System.Drawing;
+﻿#region
+
+using System.Drawing;
+
+#endregion
 
 namespace ASCII_Graphics
 {
     public static class Extensions
     {
-        private const double ASPECT_RATIO = 0.35;
-        private const int MAX_WIDTH = 225;
+        private const double ASPECT_RATIO = 0.4;
+        private const int MAX_WIDTH = 200;
 
-        public static Bitmap ToGrayScale(this Bitmap bitmap)
+        public static Bitmap BitmapToGrayScale(Bitmap bitmap)
         {
             for (var y = 0; y < bitmap.Height; y++)
             {
@@ -22,10 +26,10 @@ namespace ASCII_Graphics
             return bitmap;
         }
 
-        public static Bitmap ResizeBitmap(this Bitmap bitmap)
+        public static Bitmap ResizeBitmap(Bitmap bitmap)
         {
             if (bitmap == null) return null;
-            
+
             var newHeight = (int)(bitmap.Height * MAX_WIDTH / bitmap.Width * ASPECT_RATIO);
             if (bitmap.Width > MAX_WIDTH || bitmap.Height > newHeight)
             {
