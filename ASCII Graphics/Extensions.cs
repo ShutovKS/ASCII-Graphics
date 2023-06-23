@@ -5,7 +5,7 @@ namespace ASCII_Graphics
     public static class Extensions
     {
         private const double ASPECT_RATIO = 0.35;
-        private const int MAX_WIDTH = 250;
+        private const int MAX_WIDTH = 225;
 
         public static Bitmap ToGrayScale(this Bitmap bitmap)
         {

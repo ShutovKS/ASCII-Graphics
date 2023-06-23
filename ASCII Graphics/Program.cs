@@ -2,37 +2,33 @@
 
 using System;
 using System.Drawing;
-using System.Threading;
 using System.Windows.Forms;
+using AForge.Video.DirectShow;
 
 #endregion
 
 namespace ASCII_Graphics
 {
-    class Program
+    public static class Program
     {
         [STAThread]
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            var openFileDialog = new OpenFileDialog
+            var videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            var videoSource = new VideoCaptureDevice(videoDevices[0].MonikerString);
+            Console.SetWindowSize(1920 / 2, 1080 / 2);
+            videoSource.NewFrame += (sender, eventArgs) =>
             {
-                Filter = "Image Files (*.bmp, *.jpg, *.png)|*.bmp;*.jpg;*.png"
+                var bitmap = (Bitmap)eventArgs.Frame.Clone();
+                bitmap = bitmap.ResizeBitmap();
+                // bitmap = bitmap.ToGrayScale();
+                var str = bitmap.ToAscii();
+                
+                Console.Clear();
+                Console.WriteLine(str);
             };
 
-            while (true)
-            {
-                Console.ReadLine();
-                Console.Clear();
-
-                if (openFileDialog.ShowDialog() != DialogResult.OK) continue;
-
-                var bitmap = new Bitmap(openFileDialog.FileName);
-                bitmap = bitmap.ResizeBitmap();
-                bitmap = bitmap.ToGrayScale();
-                var str = bitmap.ToAscii();
-                Console.WriteLine(str);
-            }
-
+            videoSource.Start();
             Console.ReadLine();
         }
     }
