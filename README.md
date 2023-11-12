@@ -1,4 +1,4 @@
-Eng | [Rus](Resources/Localization Readme/README_rus.md)
+Eng | [Rus](Resources/Localization%20Readme/README_rus.md)
 
 # Converts camera images to ASCII format.
 
